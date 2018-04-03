@@ -1,0 +1,17 @@
+h2 {
+  margin-bottom: 16px;
+  font-size: 14px;
+}
+
+.batch-card {
+  margin: 10px 10px 10px 0px;
+}
+
+.create-batch {
+  margin-top: 10px !important;
+}
+
+.outer-paper {
+  margin: auto;
+  width: 80%;
+}
