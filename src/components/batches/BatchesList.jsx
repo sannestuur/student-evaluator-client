@@ -21,7 +21,7 @@ class BatchesList extends PureComponent {
   renderBatch = (batch) => {
     const { history } = this.props
 
-    return (<Card key={batch.id} className="batch-card" href="www.google.nl">
+    return (<Card key={batch.id} className="batch-card">
       <CardContent>
         <Typography variant="headline" component="h2">
           Batch #{batch.id}
