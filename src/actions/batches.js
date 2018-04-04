@@ -38,13 +38,14 @@ export const getBatches = () => (dispatch, getState) => {
 //     .catch(err => console.error(err))
 // }
 
-export const createBatch = () => (dispatch, getState) => {
+export const createBatch = (id, startDate, endDate) => (dispatch, getState) => {
   const state = getState()
   const jwt = state.currentUser.jwt
 
   request
     .post(`${baseUrl}/batches`)
     .set('Authorization', `Bearer ${jwt}`)
+    .send({ id, startDate, endDate })
     .then(result => {
       dispatch({
         type: ADD_BATCH,
@@ -54,6 +55,7 @@ export const createBatch = () => (dispatch, getState) => {
     .catch(err => console.error(err))
 }
 
+//change board here:
 export const updateBatch = (batchId, board) => (dispatch, getState) => {
   const state = getState()
   const jwt = state.currentUser.jwt

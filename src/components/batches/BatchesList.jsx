@@ -48,11 +48,11 @@ class BatchesList extends PureComponent {
     // if (batches === null || users === null) return null
     if (batches === null) return null
 
-    return (<Paper class="outer-paper">
+    return (<Paper className="outer-paper">
       <Button
         color="primary"
         variant="raised"
-        onClick={createBatch}
+        href="/batches"
         className="create-batch"
       >
         Create New Batch
