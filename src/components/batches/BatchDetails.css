@@ -2,3 +2,24 @@
   margin: auto;
   width: 60%;
 }
+
+.square {
+  flex: 1;
+  min-width: 15px;
+  max-width: 15px;
+  min-height: 15px;
+  max-height: 15px;
+  background-color: #d0021b;
+}
+
+.square.red {
+  background-color: #D0021B;
+}
+
+.square.yellow {
+  background-color: #f4df42;
+}
+
+.square.green {
+  background-color: #76db36;
+}
