@@ -10,11 +10,9 @@ import Typography from "material-ui/Typography";
 import "./StudentDetails.css";
 
 class StudentDetails extends PureComponent {
-  componentWillMount() {
+  componentWillMount(props) {
     if (this.props.authenticated) {
-      if (this.props.student === null) this.props.getStudents();
-      // if (this.props.student === null) this.props.getStudent();
-
+      this.props.getStudent(this.props.match.params.id);
     }
   }
 
