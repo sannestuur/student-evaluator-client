@@ -2,6 +2,7 @@ import React, { PureComponent } from "react";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { getBatches, updateBatch } from "../../actions/batches";
+import { createStudent } from "../../actions/students";
 import { userId } from "../../jwt";
 import Button from "material-ui/Button";
 import Paper from "material-ui/Paper";
@@ -16,8 +17,14 @@ class BatchDetails extends PureComponent {
     }
   }
 
+  getStatus = student => {
+    let lastEvaluation = student.evaluations[0] || "unknown";
+    return lastEvaluation.status || "unknown";
+  }
+
   renderStatus = student => {
-    let lastStatus = student.evaluations[0].status || "unknown";
+    let lastEvaluation = student.evaluations[0] || "unknown";
+    let lastStatus = lastEvaluation.status || "unknown";
     switch (lastStatus) {
       case "green":
         return <div className="square green" />;
@@ -25,13 +32,20 @@ class BatchDetails extends PureComponent {
         return <div className="square yellow" />;
       case "red":
         return <div className="square red" />;
-      default: <p>Not evaluated yet</p>
+      default:
+        return <p>Not evaluated yet</p>;
     }
   };
 
   renderStudent = student => {
+    const { history } = this.props;
+
     return (
-      <Card key={student.id} className="student-card" width="120">
+      <Card
+        key={student.id}
+        className="student-card"
+        width="120"
+        onClick={() => history.push(`/students/${student.id}`)}>
         <CardContent>
           <CardMedia>
             <img src={student.photo} alt="img" width="100" />
@@ -57,7 +71,22 @@ class BatchDetails extends PureComponent {
     return (
       <Paper class="outer-paper">
         <h1>Batch #{batch.id}</h1>
-
+        <Button
+          color="secondary"
+          variant="raised"
+          onClick={createStudent}
+          className="ask-question"
+        >
+          Ask a Question
+        </Button>
+        <Button
+          color="primary"
+          variant="raised"
+          onClick={createStudent}
+          className="create-student"
+        >
+          Add New Student
+        </Button>
         <div>{batchStudents.map(student => this.renderStudent(student))}</div>
       </Paper>
     );
