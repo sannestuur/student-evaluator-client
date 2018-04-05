@@ -59,7 +59,10 @@ class BatchDetails extends PureComponent {
             Status: {this.renderStatus(student)}
           </Typography>
         </CardContent>
-        <CardActions />
+        <CardActions>
+          <Button label="Edit">Edit</Button>
+          <Button label="Delete">Delete</Button>
+        </CardActions>
       </Card>
     );
   };
