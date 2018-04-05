@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom'
 import LoginPage from './components/login/LoginPage'
 import BatchesList from './components/batches/BatchesList'
 import BatchDetails from './components/batches/BatchDetails'
-import CreateBatchForm from './components/batches/CreateBatchForm'
+import CreateBatchPage from './components/batches/CreateBatchPage'
 import StudentDetails from './components/students/StudentDetails'
 import LogoutPage from './components/logout/LogoutPage'
 import './App.css'
@@ -20,7 +20,7 @@ class App extends Component {
           <Route exact path="/batches" component={BatchesList} />
           <Route exact path="/batches/:id" component={BatchDetails} />
           <Route exact path="/students/:id" component={StudentDetails} />
-          <Route exact path="/createbatch" component={CreateBatchForm} />
+          <Route exact path="/createbatch" component={CreateBatchPage} />
           <Route exact path="/" render={ () => <Redirect to="/batches" /> } />
         </div>
       </Router>
