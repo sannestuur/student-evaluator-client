@@ -23,3 +23,23 @@
 .square.green {
   background-color: #76db36;
 }
+
+.bigsquare {
+  flex: 1;
+  min-width: 40px;
+  max-width: 40px;
+  min-height: 40px;
+  max-height: 40px;
+}
+
+.bigsquare.red {
+  background-color: #D0021B;
+}
+
+.bigsquare.yellow {
+  background-color: #f4df42;
+}
+
+.bigsquare.green {
+  background-color: #76db36;
+}
