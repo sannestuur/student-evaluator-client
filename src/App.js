@@ -4,6 +4,7 @@ import LoginPage from './components/login/LoginPage'
 import BatchesList from './components/batches/BatchesList'
 import BatchDetails from './components/batches/BatchDetails'
 import CreateBatchForm from './components/batches/CreateBatchForm'
+import CreateStudentForm from './components/students/CreateStudentForm'
 import StudentDetails from './components/students/StudentDetails'
 import LogoutPage from './components/logout/LogoutPage'
 import './App.css'
@@ -21,6 +22,7 @@ class App extends Component {
           <Route exact path="/batches/:id" component={BatchDetails} />
           <Route exact path="/students/:id" component={StudentDetails} />
           <Route exact path="/createbatch" component={CreateBatchForm} />
+          <Route exact path="/createstudent" component={CreateStudentForm} />
           <Route exact path="/" render={ () => <Redirect to="/batches" /> } />
         </div>
       </Router>

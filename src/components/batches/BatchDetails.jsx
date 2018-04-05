@@ -2,7 +2,7 @@ import React, { PureComponent } from "react";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { getBatches, updateBatch, getBatch } from "../../actions/batches";
-import { createStudent, getStudents } from "../../actions/students";
+import { createStudent, getStudents, deleteStudent} from "../../actions/students";
 import { userId } from "../../jwt";
 import Button from "material-ui/Button";
 import Paper from "material-ui/Paper";
@@ -61,7 +61,11 @@ class BatchDetails extends PureComponent {
         </CardContent>
         <CardActions>
           <Button label="Edit">Edit</Button>
-          <Button label="Delete">Delete</Button>
+          <Button label="Delete"
+            onClick={ () => this.deleteStudent(student.id) }
+            >
+            Delete
+          </Button>
         </CardActions>
       </Card>
     );
@@ -73,13 +77,7 @@ class BatchDetails extends PureComponent {
     const { batch, authenticated, students, student } = this.props;
     const batchStudents = batch.students;
 
-    // // getBatchStudents = student => {
-    // //   // const {batch} = this.props;
-    // //   // return student.batch == batch.id
-    // //   return 1 == 1
-    // // }
-    //
-    // let batchStudents = this.props.students.filter(1 == 1)
+    const { history } = this.props;
 
     if (!authenticated) return <Redirect to="/login" />;
 
@@ -97,7 +95,7 @@ class BatchDetails extends PureComponent {
         <Button
           color="primary"
           variant="raised"
-          onClick={createStudent}
+          onClick={() => history.push(`/createstudent`)}
           className="create-student"
         >
           Add New Student
@@ -123,6 +121,7 @@ const mapDispatchToProps = {
   updateBatch,
   getBatch,
   getStudents,
+  deleteStudent
     // getBatchStudents
 };
 
