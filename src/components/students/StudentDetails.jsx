@@ -1,20 +1,20 @@
 import React, { PureComponent } from "react";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
-import { getBatches, updateBatch, getBatch } from "../../actions/batches";
-import { createStudent, getStudents } from "../../actions/students";
+import { getStudent, getStudents, updateStudent, createStudent } from "../../actions/students";
 import { userId } from "../../jwt";
 import Button from "material-ui/Button";
 import Paper from "material-ui/Paper";
 import Card, { CardActions, CardContent, CardMedia } from "material-ui/Card";
 import Typography from "material-ui/Typography";
-import "./BatchDetails.css";
+import "./StudentDetails.css";
 
-class BatchDetails extends PureComponent {
+class StudentDetails extends PureComponent {
   componentWillMount() {
     if (this.props.authenticated) {
-      if (this.props.batches === null) this.props.getBatches();
-      // if (this.props.batch === null) this.props.getBatch();
+      if (this.props.students === null) this.props.getStudents();
+      // if (this.props.student === null) this.props.getStudent();
+
     }
   }
 
@@ -64,31 +64,13 @@ class BatchDetails extends PureComponent {
   };
 
   render() {
-    const { batch, users, authenticated, userId } = this.props;
-    const batchStudents = batch.students;
+    const { users, authenticated, userId, student } = this.props;
 
     if (!authenticated) return <Redirect to="/login" />;
 
     return (
       <Paper class="outer-paper">
-        <h1>Batch #{batch.id}</h1>
-        <Button
-          color="secondary"
-          variant="raised"
-          onClick={createStudent}
-          className="ask-question"
-        >
-          Ask a Question
-        </Button>
-        <Button
-          color="primary"
-          variant="raised"
-          onClick={createStudent}
-          className="create-student"
-        >
-          Add New Student
-        </Button>
-        <div>{batchStudents.map(student => this.renderStudent(student))}</div>
+        <h1>Student #{student.id}</h1>
       </Paper>
     );
   }
@@ -97,16 +79,14 @@ class BatchDetails extends PureComponent {
 const mapStateToProps = (state, props) => ({
   authenticated: state.currentUser !== null,
   userId: state.currentUser && userId(state.currentUser.jwt),
-  batches: state.batches === null ? null : state.batches,
-  batch: state.batches && state.batches[props.match.params.id],
-  students: state.students === null ? null : state.users
-
+  students: state.students === null ? null : state.users,
+  student: state.students && state.students[props.match.params.id]
 });
 
 const mapDispatchToProps = {
-  getBatches,
-  updateBatch,
-  getBatch
+  getStudents,
+  updateStudent,
+  getStudent
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(BatchDetails);
+export default connect(mapStateToProps, mapDispatchToProps)(StudentDetails);
