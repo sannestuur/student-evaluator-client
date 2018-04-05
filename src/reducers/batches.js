@@ -1,12 +1,16 @@
-import {ADD_BATCH, UPDATE_BATCH, UPDATE_BATCHES} from '../actions/batches'
+import {ADD_BATCH, UPDATE_BATCH, GET_BATCHES} from '../actions/batches'
+import {GET_BATCH} from '../actions/batches'
 
-/*
-The state will contain the batches in an object with the batch ID as key
-*/
 
 export default (state = null, {type, payload}) => {
   switch (type) {
     case ADD_BATCH:
+      return {
+        ...state,
+        [payload.id]: payload
+      }
+
+    case GET_BATCH:
       return {
         ...state,
         [payload.id]: payload
@@ -18,7 +22,7 @@ export default (state = null, {type, payload}) => {
         [payload.id]: payload
       }
 
-    case UPDATE_BATCHES:
+    case GET_BATCHES:
       return payload.reduce((batches, batch) => {
         batches[batch.id] = batch
         return batches

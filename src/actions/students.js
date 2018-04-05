@@ -2,9 +2,26 @@ import * as request from 'superagent'
 import {baseUrl} from '../constants'
 
 export const ADD_STUDENT = 'ADD_STUDENT'
+export const GET_STUDENT = 'GET_STUDENT'
+export const GET_STUDENTS = 'GET_STUDENTS'
 export const UPDATE_STUDENT = 'UPDATE_STUDENT'
-export const UPDATE_STUDENTS = 'UPDATE_STUDENTS'
 export const UPDATE_STUDENT_SUCCESS = 'UPDATE_STUDENT_SUCCESS'
+
+export const getStudent = (studentId) => (dispatch, getState) => {
+  const state = getState()
+  const jwt = state.currentUser.jwt
+
+  request
+    .get(`${baseUrl}/students/${studentId}`)
+    .set('Authorization', `Bearer ${jwt}`)
+    .then(result => {
+      dispatch({
+        type: GET_STUDENT,
+        payload: result.body
+      })
+    })
+    .catch(err => console.error(err))
+}
 
 export const getStudents = () => (dispatch, getState) => {
   const state = getState()
@@ -15,7 +32,7 @@ export const getStudents = () => (dispatch, getState) => {
     .set('Authorization', `Bearer ${jwt}`)
     .then(result => {
       dispatch({
-        type: UPDATE_STUDENTS,
+        type: GET_STUDENTS,
         payload: result.body
       })
     })

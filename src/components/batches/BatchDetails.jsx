@@ -1,8 +1,8 @@
 import React, { PureComponent } from "react";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
-import { getBatches, updateBatch } from "../../actions/batches";
-import { createStudent } from "../../actions/students";
+import { getBatches, updateBatch, getBatch } from "../../actions/batches";
+import { createStudent, getStudents } from "../../actions/students";
 import { userId } from "../../jwt";
 import Button from "material-ui/Button";
 import Paper from "material-ui/Paper";
@@ -13,7 +13,9 @@ import "./BatchDetails.css";
 class BatchDetails extends PureComponent {
   componentWillMount() {
     if (this.props.authenticated) {
-      if (this.props.batch === null) this.props.getBatches();
+      if (this.props.batches === null) this.props.getBatches();
+      if (this.props.students === null) this.props.getStudents();
+      // if (this.props.batch === null) this.props.getBatch();
     }
   }
 
@@ -62,9 +64,19 @@ class BatchDetails extends PureComponent {
     );
   };
 
+
+
   render() {
-    const { batch, users, authenticated, userId } = this.props;
+    const { batch, authenticated, students, student } = this.props;
     const batchStudents = batch.students;
+
+    // // getBatchStudents = student => {
+    // //   // const {batch} = this.props;
+    // //   // return student.batch == batch.id
+    // //   return 1 == 1
+    // // }
+    //
+    // let batchStudents = this.props.students.filter(1 == 1)
 
     if (!authenticated) return <Redirect to="/login" />;
 
@@ -96,12 +108,19 @@ class BatchDetails extends PureComponent {
 const mapStateToProps = (state, props) => ({
   authenticated: state.currentUser !== null,
   userId: state.currentUser && userId(state.currentUser.jwt),
-  batch: state.batches && state.batches[props.match.params.id]
+  batches: state.batches === null ? null : state.batches,
+  batch: state.batches && state.batches[props.match.params.id],
+  students: state.students === null ? null : state.students,
+  student: state.students && state.students[props.match.params.id]
+
 });
 
 const mapDispatchToProps = {
   getBatches,
-  updateBatch
+  updateBatch,
+  getBatch,
+  getStudents,
+    // getBatchStudents
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(BatchDetails);
