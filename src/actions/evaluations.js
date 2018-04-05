@@ -1,54 +1,54 @@
 import * as request from 'superagent'
 import {baseUrl} from '../constants'
 
-export const ADD_BATCH = 'ADD_BATCH'
-export const UPDATE_BATCH = 'UPDATE_BATCH'
-export const UPDATE_BATCHES = 'UPDATE_BATCHES'
-export const UPDATE_BATCH_SUCCESS = 'UPDATE_BATCH_SUCCESS'
+export const ADD_EVALUATION = 'ADD_EVALUATION'
+export const UPDATE_EVALUATION = 'UPDATE_EVALUATION'
+export const UPDATE_EVALUATIONS = 'UPDATE_EVALUATIONS'
+export const UPDATE_EVALUATION_SUCCESS = 'UPDATE_EVALUATION_SUCCESS'
 
-export const getBatches = () => (dispatch, getState) => {
+export const getEvaluations = () => (dispatch, getState) => {
   const state = getState()
   const jwt = state.currentUser.jwt
 
   request
-    .get(`${baseUrl}/batches`)
+    .get(`${baseUrl}/evaluations`)
     .set('Authorization', `Bearer ${jwt}`)
     .then(result => {
       dispatch({
-        type: UPDATE_BATCHES,
+        type: UPDATE_EVALUATIONS,
         payload: result.body
       })
     })
     .catch(err => console.error(err))
 }
 
-export const createBatch = () => (dispatch, getState) => {
+export const createEvaluation = () => (dispatch, getState) => {
   const state = getState()
   const jwt = state.currentUser.jwt
 
   request
-    .post(`${baseUrl}/batches`)
+    .post(`${baseUrl}/evaluations`)
     .set('Authorization', `Bearer ${jwt}`)
     .then(result => {
       dispatch({
-        type: ADD_BATCH,
+        type: ADD_EVALUATION,
         payload: result.body
       })
     })
     .catch(err => console.error(err))
 }
 
-export const updateBatch = (batchId, update) => (dispatch, getState) => {
+export const updateEvaluation = (evaluationId, update) => (dispatch, getState) => {
   const state = getState()
   const jwt = state.currentUser.jwt
 
   request
-    .patch(`${baseUrl}/batches/${batchId}`)
+    .patch(`${baseUrl}/evaluations/${evaluationId}`)
     .set('Authorization', `Bearer ${jwt}`)
     .send({update})
     .then(result => {
       dispatch({
-        type: UPDATE_BATCH_SUCCESS
+        type: UPDATE_EVALUATION_SUCCESS
       })
     })
     .catch(err => console.error(err))
