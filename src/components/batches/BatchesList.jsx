@@ -1,5 +1,5 @@
 import React, { PureComponent } from "react";
-import { getBatches, createBatch } from "../../actions/batches";
+import { getBatches } from "../../actions/batches";
 // import {getUsers} from '../../actions/users'
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
@@ -49,6 +49,7 @@ class BatchesList extends PureComponent {
 
   render() {
     const { batches, authenticated, createBatch } = this.props;
+    const { history } = this.props;
 
     if (!authenticated) return <Redirect to="/login" />;
 
@@ -60,7 +61,7 @@ class BatchesList extends PureComponent {
         <Button
           color="primary"
           variant="raised"
-          onClick={createBatch}
+          onClick={() => history.push(`/createbatch`)}
           className="create-batch"
         >
           Create New Batch
@@ -82,7 +83,7 @@ const mapStateToProps = state => ({
 });
 
 export default withRouter(
-  connect(mapStateToProps, { getBatches, createBatch })(BatchesList)
+  connect(mapStateToProps, { getBatches })(BatchesList)
 );
 
 //if needed, add getUsers to dispatched functions

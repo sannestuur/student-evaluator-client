@@ -30,7 +30,6 @@ class CreateBatchForm extends PureComponent {
   };
 
   render() {
-    const { createBatch } = this.props;
 
     return (
       <Paper class="outer-paper">
