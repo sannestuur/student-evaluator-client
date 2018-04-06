@@ -46,7 +46,7 @@ export const createBatch = (newBatch) => (dispatch, getState) => {
   request
     .post(`${baseUrl}/batches`)
     .set('Authorization', `Bearer ${jwt}`)
-    .send({newBatch})
+    .send(newBatch)
     .then(result => {
       dispatch({
         type: ADD_BATCH,

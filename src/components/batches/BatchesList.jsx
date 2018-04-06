@@ -1,8 +1,7 @@
 import React, { PureComponent } from "react";
-import { getBatches } from "../../actions/batches";
-// import {getUsers} from '../../actions/users'
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
+import { getBatches } from "../../actions/batches";
 import Button from "material-ui/Button";
 import Paper from "material-ui/Paper";
 import Card, { CardActions, CardContent } from "material-ui/Card";
@@ -14,7 +13,6 @@ class BatchesList extends PureComponent {
   componentWillMount() {
     if (this.props.authenticated) {
       if (this.props.batches === null) this.props.getBatches();
-      // if (this.props.users === null) this.props.getUsers()
     }
   }
 
@@ -48,12 +46,11 @@ class BatchesList extends PureComponent {
   };
 
   render() {
-    const { batches, authenticated, createBatch } = this.props;
+    const { batches, authenticated } = this.props;
     const { history } = this.props;
 
     if (!authenticated) return <Redirect to="/login" />;
 
-    // if (batches === null || users === null) return null
     if (batches === null) return null;
 
     return (
@@ -68,6 +65,7 @@ class BatchesList extends PureComponent {
         </Button>
 
         <div>{batches.map(batch => this.renderBatch(batch))}</div>
+
       </Paper>
     );
   }
@@ -75,7 +73,6 @@ class BatchesList extends PureComponent {
 
 const mapStateToProps = state => ({
   authenticated: state.currentUser !== null,
-  // users: state.users === null ? null : state.users,
   batches:
     state.batches === null
       ? null
@@ -85,5 +82,3 @@ const mapStateToProps = state => ({
 export default withRouter(
   connect(mapStateToProps, { getBatches })(BatchesList)
 );
-
-//if needed, add getUsers to dispatched functions
