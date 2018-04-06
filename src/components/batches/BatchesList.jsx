@@ -51,7 +51,6 @@ class BatchesList extends PureComponent {
 
     if (!authenticated) return <Redirect to="/login" />;
 
-    // if (batches === null || users === null) return null
     if (batches === null) return null;
 
     return (

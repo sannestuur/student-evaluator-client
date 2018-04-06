@@ -42,17 +42,6 @@ class CreateStudentForm extends PureComponent {
           />
         </div>
         <div>
-          <label htmlFor="Batch">Batch:</label>
-          <input
-            type="batch"
-            placeholder="e.g. 15"
-            name="batch"
-            id="batch"
-            value={this.state.batchId || ""}
-            onChange={this.handleChange}
-          />
-        </div>
-        <div>
           <label htmlFor="Photo">Photo:</label>
           <input
             type="photo"
