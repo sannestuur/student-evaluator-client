@@ -19,6 +19,30 @@ class BatchDetails extends PureComponent {
     }
   }
 
+  // getRandomStudent = () => {
+  //   const { batch, students } = this.props;
+  //   const batchStudents = batch.students;
+  //
+  //   let randomNumber = Math.floor(Math.random() * 100)
+  //   let randomNumber2 = Math.random()
+  //
+  //   let redStudents = batchStudents.filter(student.evaluations[0].status == "red");
+  //   let yellowStudents = batchStudents.filter(student.evaluations[0].status == "yellow");
+  //   let greenStudents = batchStudents.filter(student.evaluations[0].status == "green");
+  //   let reddestStudents = redStudents.push(batchStudents.filter(!student.evaluations[0]));
+  //
+  //   switch (randomNumber){
+  //     case randomNumber <= 53 :
+  //       return reddestStudents[Math.floor(randomNumber2 * reddestStudents.length)]
+  //     case randomNumber <= 81 :
+  //       return yellowStudents[Math.floor(randomNumber2 * yellowStudents.length)]
+  //     case randomNumber <= 100 :
+  //       return greenStudents[Math.floor(randomNumber2 * greenStudents.length)]
+  //     default:
+  //       return undefined;
+  //   }
+  // }
+
   getStatus = student => {
     let lastEvaluation = student.evaluations[0] || "unknown";
     return lastEvaluation.status || "unknown";

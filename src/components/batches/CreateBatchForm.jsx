@@ -12,14 +12,16 @@ class CreateBatchForm extends PureComponent {
     }
   }
 
-  handleSubmit = (batch) => {
-    this.props.createBatch(batch.id, batch.startDate, batch.endDate);
-  };
+  state = {}
 
-  // handleSubmit = e => {
-  //   e.preventDefault();
-  //   this.props.onSubmit(this.state);
+  // handleSubmit = (batch) => {
+  //   this.props.createBatch(batch.id, batch.startDate, batch.endDate);
   // };
+
+  handleSubmit = e => {
+    e.preventDefault();
+    this.props.onSubmit(this.state);
+  };
 
   handleChange = event => {
     const { name, value } = event.target;
@@ -38,20 +40,20 @@ class CreateBatchForm extends PureComponent {
           <div>
             <label htmlFor="Batch">Batch</label>
             <input
-              type="batch"
+              name="id"
               placeholder="e.g. 15"
-              name="batch"
-              id="batch"
+              id="id"
+              value={this.state.id || ''}
               onChange={this.handleChange}
             />
           </div>
           <div>
             <label htmlFor="startDate">Start Date</label>
             <input
-              type="startDate"
-              placeholder="dd-mm-yyyy"
               name="startDate"
+              placeholder="dd-mm-yyyy"
               id="startDate"
+              value={this.state.startDate || ''}
               onChange={this.handleChange}
             />
           </div>
@@ -59,15 +61,15 @@ class CreateBatchForm extends PureComponent {
           <div>
             <label htmlFor="endDate">End Date</label>
             <input
-              type="endDate"
-              placeholder="dd-mm-yyyy"
               name="endDate"
+              placeholder="dd-mm-yyyy"
               id="endDate"
+              value={this.state.endDate || ''}
               onChange={this.handleChange}
             />
           </div>
 
-          <button type="submit" onClick={this.handleClick}>Add Batch</button>
+          <button type="submit">Add Batch</button>
         </form>
       </Paper>
     );
