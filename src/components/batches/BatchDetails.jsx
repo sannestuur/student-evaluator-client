@@ -80,8 +80,10 @@ class BatchDetails extends PureComponent {
             {student.firstName} {student.lastName}
           </Typography>
           <Typography color="textSecondary">
-            Status: {this.renderStatus(student)}
+            Status:
           </Typography>
+          <div>{this.renderStatus(student)}
+          </div>
         </CardContent>
         <CardActions>
           <Button label="Edit">Edit</Button>

@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
-import { getStudent, getStudents, updateStudent, createStudent } from "../../actions/students";
+import { getStudent, getStudents, updateStudent } from "../../actions/students";
 import { userId } from "../../jwt";
 import Button from "material-ui/Button";
 import Paper from "material-ui/Paper";
