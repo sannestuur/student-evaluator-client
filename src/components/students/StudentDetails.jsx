@@ -19,7 +19,7 @@ class StudentDetails extends PureComponent {
   getStatus = student => {
     let lastEvaluation = student.evaluations[0] || "unknown";
     return lastEvaluation.status || "unknown";
-  }
+  };
 
   renderStatus = student => {
     let lastEvaluation = student.evaluations[0] || "unknown";
@@ -40,11 +40,11 @@ class StudentDetails extends PureComponent {
     let thisStatus = evaluation.status || "unknown";
     switch (thisStatus) {
       case "green":
-        return <div className="square green" id={evaluation.id}/>;
+        return <div className="square green" id={evaluation.id} />;
       case "yellow":
-        return <div className="square yellow" id={evaluation.id}/>;
+        return <div className="square yellow" id={evaluation.id} />;
       case "red":
-        return <div className="square red" id={evaluation.id}/>;
+        return <div className="square red" id={evaluation.id} />;
       default:
         return <p>Not evaluated yet</p>;
     }
@@ -56,44 +56,48 @@ class StudentDetails extends PureComponent {
     if (!authenticated) return <Redirect to="/login" />;
 
     return (
-      <Paper class="outer-paper">
-        <h1>Student #{student.id}</h1>
-          <Card
-            key={student.id}
-            className="student-card"
-            width="120">
-            <CardContent>
-              <CardMedia>
-                <img src={student.photo} alt="img" width="100" />
-              </CardMedia>
-              <Typography variant="headline" component="h2">
-                {student.firstName} {student.lastName}
-              </Typography>
-              <Typography variant="headline" component="h2">
-                Batch #15
-              </Typography>
-              <Typography color="textSecondary">
-                Evaluations: {student.evaluations.reverse().map(e => this.renderEvaluation(e))}
-              </Typography>
-              <div className="bigsquare green "/>
-              <div className="bigsquare yellow "/>
-              <div className="bigsquare red "/>
-              <Typography color="textSecondary">
-                Daily evaluation for: [dd]/[mm]/[yyyy]
-              </Typography>
-              <form onSubmit={this.handleSubmit}>
-        				<div>
-        					<label htmlFor="remarks">remarks:</label>
-        					<input type="text" name="remarks" id="remarks" value={
-        						student.id || ''
-        					} onChange={ this.handleChange } />
-        				</div>
-        				<button type="submit">Save</button>
-                <button type="submitandnext">Save and Next</button>
-        			</form>
-            </CardContent>
-            <CardActions />
-          </Card>
+      <Paper className="outer-paper">
+        <div key={student.id} className="student-card">
+          <div className="photo">
+            <img src={student.photo} alt="img" width="100" />
+          </div>
+          <div className="info">
+            <Typography variant="headline" component="h2">
+              {student.firstName} {student.lastName}
+            </Typography>
+            <Typography variant="headline" component="h2">
+              Batch #15
+            </Typography>
+            <Typography color="textSecondary">
+              Evaluations:{" "}
+              {student.evaluations.reverse().map(e => this.renderEvaluation(e))}
+            </Typography>
+          </div>
+          <div className="set-status">
+            <div className="bigsquare green " />
+            <div className="bigsquare yellow " />
+            <div className="bigsquare red " />
+          </div>
+          <div ClassName="set-remarks">
+            <Typography color="textSecondary">
+              Daily evaluation for: 06/04/2018
+            </Typography>
+            <form onSubmit={this.handleSubmit}>
+              <div>
+                <label htmlFor="remarks">remarks:</label>
+                <input
+                  type="text"
+                  name="remarks"
+                  id="remarks"
+                  value={student.id || ""}
+                  onChange={this.handleChange}
+                />
+              </div>
+              <button type="submit">Save</button>
+              <button type="submitandnext">Save and Next</button>
+            </form>
+          </div>
+        </div>
       </Paper>
     );
   }
